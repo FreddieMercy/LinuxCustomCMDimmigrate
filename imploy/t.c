@@ -233,6 +233,10 @@ int main(int argc, char* argv[])
 
 	    close(fd);
 	    close(writer);
+	    free(s);
+	    free(cp);
+	    free(ending);
+	    free(result);
 	}
 	else
 	{
