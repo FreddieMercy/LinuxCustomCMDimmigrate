@@ -1,0 +1,6 @@
+mkdir cmd
+echo '' > cmd/list.txt
+cp ~/.bashrc cmd/bashrc
+gcc t.c
+./a.out cmd/bashrc
+rm cmd/bashrc
