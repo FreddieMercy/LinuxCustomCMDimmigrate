@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ $1 == "db" ]
+	then
+		 python manage.py sqlmigrate $2 $3
+elif [ $1 == "run" ]
+        then
+                 python manage.py runserver $2 $3
+elif [ $1 == "app" ]
+        then
+                 python manage.py startapp $2 $3
+elif [ $1 == "static" ]
+        then
+                 python manage.py collectstatic $2 $3
+elif [ $1 == "sup" ]
+        then
+                 python manage.py createsuperuser $2 $3
+elif [ $1 == "-v" ] || [ $1 == "ver" ]
+	then
+		python -c "
+import sys
+sys.path = sys.path[1:]
+import django
+print(django.__path__)"
+
+else
+	 python manage.py $1 $2 $3
+fi

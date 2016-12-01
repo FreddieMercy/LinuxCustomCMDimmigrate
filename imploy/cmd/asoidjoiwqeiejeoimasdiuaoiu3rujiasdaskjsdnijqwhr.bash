@@ -1,0 +1,6 @@
+#!/bin/bash
+
+gedit ~/.bashrc
+
+
+
