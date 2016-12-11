@@ -1,0 +1,4 @@
+chmod +x cmd/**
+cp cmd/** /usr/bin
+source ~/.bashrc
+

@@ -1,4 +1,5 @@
 #define codeLength 100
+#define BLKSIZE	   256
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -72,12 +73,12 @@ int main(int argc, char* argv[])
 	int byteRead=0;
 	int iscode = 1;
 	int found = 0;
-	char code[codeLength] = "#@#^NdWsFred123456789abcdefg";
-	char buf[100];
+	char code[codeLength] = "#@#^NdWsFred123456789abcdefg\n";
+	char buf[BLKSIZE];
 	char *s;
 	int end = 0;
 	int counter;
-	char cmd[100];
+	char cmd[BLKSIZE];
 	int i = 0;
 	int j = 0;
 	int z = 0;
@@ -85,6 +86,8 @@ int main(int argc, char* argv[])
 	char *ending = " cmd";
 	char *result;
 	int writer;
+
+	int usingCode = 1;
 	
 	for (i=0; i<argc; i++){
 	    printf("argv[%d]=%s\n", i, argv[i]);
@@ -95,7 +98,7 @@ int main(int argc, char* argv[])
 		printf("parsing %s...\n", argv[1]);
 		
 		fd = open(argv[1], O_RDONLY);
-		writer = open("cmd/list.txt", O_WRONLY);
+		writer = open("list.txt", O_WRONLY);
 		
 		lseek(fd, SEEK_SET, 0);
 
@@ -105,7 +108,7 @@ int main(int argc, char* argv[])
 	        return 1;
 	    }
 
-	    byteRead = readByLine(fd, &buf, 100);
+	    byteRead = readByLine(fd, &buf, BLKSIZE);
 
 	    do
 	    {
@@ -128,6 +131,12 @@ int main(int argc, char* argv[])
 				if(iscode != 0)
 				{
 					printf("\n\nfound the following: \n");
+					
+					if(usingCode)
+					{
+						write(writer, code, strlen(code));
+					}
+
 					found = 1;
 				}
 				
@@ -227,7 +236,7 @@ int main(int argc, char* argv[])
 			    //printf("%c\n", buf[0]);
 			}
 
-		    byteRead = readByLine(fd, buf, 100);
+		    byteRead = readByLine(fd, &buf, BLKSIZE);
 
 		}while(byteRead > 0);
 

@@ -59,6 +59,7 @@ fi
 
 done
 
+apt-get clean
 apt-get update
 apt-get upgrade
 apt-get update

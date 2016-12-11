@@ -1,5 +1,5 @@
 mkdir cmd
-echo '' > cmd/list.txt
+echo '' > list.txt
 cp ~/.bashrc cmd/bashrc
 gcc t.c
 ./a.out cmd/bashrc
